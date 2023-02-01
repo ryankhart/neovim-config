@@ -94,6 +94,8 @@ return packer.startup(function(use)
     use { "lewis6991/gitsigns.nvim", commit = "2c6f96dda47e55fa07052ce2e2141e8367cbaaf2" }
     use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim',
         config = function ()
+            local neogit = require("neogit")
+
             neogit.setup {
                 disable_signs = false,
                 disable_hint = false,
