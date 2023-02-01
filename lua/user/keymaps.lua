@@ -3,12 +3,7 @@ local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 
 -- Shorten function name
-local keymap = vim.api.nvim_set_keymap
-
---Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+local keymap = vim.keymap.set
 
 -- Modes
 --   normal_mode = "n",
@@ -18,7 +13,23 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Normal --
+--Remap space as leader key
+keymap("n", "<Space>", "<Nop>", opts)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- Disable Backspace key in normal mode
+-- keymap("n", "<BS>", "<nop>", opts)
+
+-- Move the Redo keymap to a more sensible mapping
+keymap("n", "R", "<Nop>", opts)
+keymap("n", "U", ":redo<CR>", opts)
+
+-- Double tap ESC to hide text highlighting, from search for example
+keymap("n", "<ESC><ESC>", "<cmd>noh<CR>", opts)
+
+keymap("n", "J", "<Nop>", opts)
+
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
@@ -26,45 +37,59 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<A-Up>", ":resize -2<CR>", opts)
+keymap("n", "<A-Down>", ":resize +2<CR>", opts)
+keymap("n", "<A-Left>", ":vertical resize -2<CR>", opts)
+keymap("n", "<A-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- Move text up and down
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+keymap("n", "<A-j>", ":move .+1<CR>==", opts)
+keymap("v", "<A-j>", ":move .+1<CR>==", opts)
+keymap("n", "<A-k>", ":move .-2<CR>==", opts)
+keymap("v", "<A-k>", ":move .-2<CR>==", opts)
+keymap("i", "<A-j>", "<ESC>:move .+1<CR>==i", opts)
+keymap("i", "<A-k>", "<ESC>:move .-2<CR>==i", opts)
+keymap("x", "J",     ":move '>+1<CR>gv-gv", opts)
+keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
+keymap("x", "K",     ":move '<-2<CR>gv-gv", opts)
+keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
--- Insert --
+-- Helix style keymaps
+keymap("n", "gh", "^", opts)
+keymap("n", "gl", "$", opts)
+
 -- Press jk fast to exit insert mode 
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "kj", "<ESC>", opts)
 
--- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
--- Move text up and down
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+-- Pasting while in visual mode no longer replaces
+-- clipboard with deleted text
 keymap("v", "p", '"_dP', opts)
 
--- Visual Block --
--- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+-- Auto-indent whole file (gg to move to top, = to format every line until the
+-- last line (G), then return to previous cursor position (<C-o>))
+keymap("n", "<F7>", "gg=G<C-o>", opts)
 
 -- Terminal --
--- Better terminal navigation
+ -- Better terminal navigation
 -- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 -- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
+-- Plugin Keymaps --
+-- Undotree
+keymap("n", "<F5>", ":UndotreeToggle<cr>:UndotreeFocus<cr>", opts)
+
+if vim.fn.exists("vim.g.plugs.undotree") then
+    vim.g.loaded_undotree = 2
+    vim.api.nvim_set_keymap("n", "<Leader>u", "<Cmd>UndotreeToggle<CR>", {noremap = true})
+end
