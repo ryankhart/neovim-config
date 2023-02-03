@@ -202,6 +202,8 @@ local mappings = {
         v = { ":ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
     },
 
+    u = {':UndotreeToggle<cr>:UndotreeFocus<cr>', 'Undotree'},
+
     w = {
         name = "Window",
         d = { "<C-w>c", "Delete window" },
