@@ -92,7 +92,7 @@ keymap("n", "<F7>", "gg=G<C-o>", opts)
 -- Undotree
 keymap("n", "<F5>", ":UndotreeToggle<cr>:UndotreeFocus<cr>", opts)
 
-if vim.fn.exists("vim.g.plugs.undotree") then
-    vim.g.loaded_undotree = 2
-    vim.api.nvim_set_keymap("n", "<Leader>u", ":UndotreeToggle<CR>", {noremap = true})
-end
+-- if vim.fn.exists("vim.g.plugs.undotree") then
+--     vim.g.loaded_undotree = 2
+--     vim.api.nvim_set_keymap("n", "<Leader>u", ":UndotreeToggle<CR>", {noremap = true})
+-- end
