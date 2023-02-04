@@ -40,6 +40,11 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
+    use { 'https://github.com/smjonas/inc-rename.nvim',
+        config = function()
+            require('inc_rename').setup()
+        end
+    }
     use { 'https://github.com/nvim-orgmode/orgmode',
         -- requires = 'https://github.com/nvim-treesitter/nvim-treesitter',
         config = function()
