@@ -1,7 +1,7 @@
 local options = {
     backup = false,                          -- creates a backup file
     clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
-    cmdheight = 0,                           -- more space in the neovim command line for displaying messages
+    cmdheight = 1,                           -- more space in the neovim command line for displaying messages
     laststatus = 0,                          -- height of status bar when there is no status to be shown
     completeopt = { "menuone", "noselect" }, -- mostly just for cmp
     conceallevel = 0,                        -- so that `` is visible in markdown files
