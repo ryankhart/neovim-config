@@ -111,7 +111,7 @@ return packer.startup(function(use)
     use { "https://github.com/rmagatti/auto-session", commit = "c8b2f4048f846387361bd04cc185bf1aa7d2e3d1" }
     use { "https://github.com/wbthomason/packer.nvim", commit = "6afb67460283f0e990d35d229fd38fdc04063e0a" } -- Have packer manage itself
     use { "https://github.com/nvim-lua/plenary.nvim", commit = "4b7e52044bbb84242158d977a50c4cbcd85070c7" } -- Useful lua functions used by lots of plugins
-    use { "https://github.com/windwp/nvim-autopairs", commit = "4fc96c8f3df89b6d23e5092d31c866c53a346347" } -- Autopairs, integrates with both cmp and treesitter
+    use { "https://github.com/windwp/nvim-autopairs" } -- Autopairs, integrates with both cmp and treesitter
     use { "https://github.com/numToStr/Comment.nvim", commit = "97a188a98b5a3a6f9b1b850799ac078faa17ab67" }
     use { "https://github.com/JoosepAlviste/nvim-ts-context-commentstring", commit = "4d3a68c41a53add8804f471fcc49bb398fe8de08" }
     use { "https://github.com/kyazdani42/nvim-web-devicons", commit = "563f3635c2d8a7be7933b9e547f7c178ba0d4352" }
