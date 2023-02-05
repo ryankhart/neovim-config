@@ -46,10 +46,10 @@ keymap("n", "-", "<nop>", opts)
 keymap("n", "+", "<nop>", opts)
 
 -- Resize with arrows
-keymap("n", "<A-Up>", ":resize -2<CR>", opts)
-keymap("n", "<A-Down>", ":resize +2<CR>", opts)
-keymap("n", "<A-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<A-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<A-S-k>", ":resize -2<CR>", opts)
+keymap("n", "<A-S-j>", ":resize +2<CR>", opts)
+keymap("n", "<A-S-h>", ":vertical resize -2<CR>", opts)
+keymap("n", "<A-S-l>", ":vertical resize +2<CR>", opts)
 
 -- Move text up and down
 keymap("n", "<A-j>", ":move .+1<CR>==", opts)
