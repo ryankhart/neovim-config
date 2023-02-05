@@ -79,10 +79,11 @@ keymap("v", "p", '"_dP', opts)
 
 -- Auto-indent whole file (gg to move to top, = to format every line until the
 -- last line (G), then return to previous cursor position (<C-o>))
-keymap("n", "<F7>", "gg=G<C-o>", opts)
+keymap("n", "<leader>i", ":let view=winsaveview()<cr>gg=G:call winrestview(view)<cr>:echo 'Document auto-indended!'<cr>",
+    {desc = "Auto-indent whole document"})
 
 -- Terminal --
- -- Better terminal navigation
+-- Better terminal navigation
 -- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 -- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
